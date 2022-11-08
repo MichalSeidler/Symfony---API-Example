@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% import '_macros.html.twig' as macros %}
+
+{% block title %}Jobs{% endblock %}
+{% block body %}
+<div class="container-fluid mt-4">
+        {{ macros.pagination(totalPages, page, "?page=") }}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <td>{{ job.id }}</td>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.description|raw }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+{% endblock %}
