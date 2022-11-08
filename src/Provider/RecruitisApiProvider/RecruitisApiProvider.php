@@ -48,7 +48,9 @@ class RecruitisApiProvider {
                 $responseData = json_decode($response->getContent(), true);
 
                 return Collection::populate(Job::class, $responseData);
-            } 
+            } else {
+                throw new \RuntimeException('API Error');
+            }
         } catch (Throwable $e){
             throw new \RuntimeException('API Error');
         }
