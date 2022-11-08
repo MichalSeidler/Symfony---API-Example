@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Knp\Component\Pager\PaginatorInterface;
@@ -26,6 +27,9 @@ class JobController extends AbstractController
     {
         $pageLimit = 10;
         $page = $request->query->get('page', 1);
+        if(!is_numeric($page)){
+            throw new NotFoundHttpException;
+        }
         
         $jobs = $recruitisApiProvider->getJobs($page, $pageLimit);
 
